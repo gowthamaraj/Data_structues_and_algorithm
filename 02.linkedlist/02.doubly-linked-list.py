@@ -1,26 +1,18 @@
-# https://www.codefellows.org/blog/implementing-a-singly-linked-list-in-python/
+# https://stackabuse.com/doubly-linked-list-with-python-examples/
+
 class Node:
     def __init__(self, data):
         self.data = data
+        self.prev = None
         self.next = None
 
-    def get_data(self):
-        return self.data
-
-    def get_next(self):
-        return self.next
-
-    def set_next(self, next):
-        self.next = next
-
-# The Linked List
 # Insert: inserts a new node into the list
 # Size: returns size of list
 # Search: searches list for a node containing the requested data and returns that node if found, otherwise None
 # Delete: searches list for a node containing the requested data and removes it from list if found, otherwise return False
 
-class LinkedList:
-    def __init__(self, head=None):
+class DList:
+    def __init__(self, head):
         node = Node(head)
         self.head = node
         self.tail = node
@@ -28,10 +20,11 @@ class LinkedList:
     def insert(self, data):
         node = Node(data)
         if self.head == None:
-            self.head =  node
+            self.head = node
             self.tail = node
         else:
-            self.tail.set_next(node)
+            node.prev = self.tail
+            self.tail.next = node
             self.tail = node
 
     def size(self):
@@ -39,17 +32,17 @@ class LinkedList:
         count = 0
         while(current != None):
             count += 1
-            current = current.get_next()
+            current = current.next
         return count
-
+    
     def search(self, data):
         if self.head == None:
             return None
         current = self.head
         while(current != None):
-            if current.get_data() == data:
+            if current.data == data:
                 return current
-            current = current.get_next()
+            current = current.next
         return None
 
     def delete(self, data):
@@ -57,33 +50,39 @@ class LinkedList:
         if current == None:
             return False
         if current.next == None:
-            if current.get_data() == data:
+            if current.data == data:
                 self.head = None
                 return True
             else:
                 return False
-        if current.get_data() == data:
-            self.head = current.get_next()
+        if current.data == data:
+            self.head = current.next
+            current.prev = None
             return True
-        previous = current
-        current = current.get_next()
-        while(current.get_next() != None):
-            if current.get_data() == data:
-                previous.set_next(current.get_next())
+        if self.tail.data == data:
+            self.tail = self.tail.prev
+            self.tail.next = None
+            return True
+        current = current.next
+        while(current != None):
+            if current.data == data:
+                current.prev.next = current.next
+                current.next.prev = current.prev
+                current = current.next
                 return True
-            current = current.get_next()
         return False
 
 # Testing
 # Insertion operations
-LList = LinkedList(1)
-LList.insert(2)
-LList.insert(3)
-print(LList.size())
+dlist = DList(1)
+dlist.insert(2)
+dlist.insert(3)
+print(dlist.size())
 
 # Search operation
-print(LList.search(2).get_data())
+print(dlist.search(1).data)
 
 # delete operation
-print(LList.delete(4))
-print(LList.size())
+print(dlist.delete(3))
+print(dlist.delete(1))
+print(dlist.size())
