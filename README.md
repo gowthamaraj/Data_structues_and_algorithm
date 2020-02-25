@@ -5,3 +5,4 @@ Implementing Data structures & Algorithms using Python
 
 ## Data Structures
 1. Arrays
+2. LinkedList
