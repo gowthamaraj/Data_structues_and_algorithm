@@ -7,3 +7,4 @@ Implementing Data structures & Algorithms using Python
 1. Arrays
 2. LinkedList
 3. Stack
+4. Queue
