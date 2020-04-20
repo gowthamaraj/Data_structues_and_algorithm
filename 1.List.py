@@ -18,27 +18,32 @@ class Linkedlist(object):
 
     def get_position(self, position):
 
+        counter = 1
+        current = self.head
         if position < 1:
-            return 0;
-
-        else:
-            current_ele = self.head;
-            val = None;
-            for i in range(position):
-                if current_ele.next != None:
-                    current_ele = current_ele.next;
-            return current_ele.value;
+            return None
+        while current and counter <= position:
+            if counter == position:
+                return current
+            current = current.next
+            counter += 1
+        return None
 
 
     def insert(self, new_element, position):
 
-        current_ele = self.head;
-        position = position-1;
-        while position:
-            current_ele=current_ele.next;
-            position = position-1;
-        new_element.next = current_ele.next;
-        current_ele.next = new_element;
+        counter = 1
+        current = self.head
+        if position > 1:
+            while current and counter < position:
+                if counter == position - 1:
+                    new_element.next = current.next
+                    current.next = new_element
+                current = current.next
+                counter += 1
+        elif position == 1:
+            new_element.next = self.head
+            self.head = new_element
 
         
     def delete(self, value):
@@ -53,7 +58,8 @@ class Linkedlist(object):
             else:
                 self.head = current.next
 
-        
+# Test cases
+# Set up some Elements
 e1 = Element(1)
 e2 = Element(2)
 e3 = Element(3)
@@ -68,23 +74,18 @@ ll.append(e3)
 # Should print 3
 print(ll.head.next.next.value)
 # Should also print 3
-print(ll.get_position(3))
+print(ll.get_position(3).value)
 
 # Test insert
 ll.insert(e4,3)
 # Should print 4 now
-print(ll.get_position(3))
+print(ll.get_position(3).value)
 
 # Test delete
 ll.delete(1)
 # Should print 2 now
-print(ll.get_position(1))
+print(ll.get_position(1).value)
 # Should print 4 now
-print(ll.get_position(2))
+print(ll.get_position(2).value)
 # Should print 3 now
-print(ll.get_position(3))
-
-
-
-
-
+print(ll.get_position(3).value)
