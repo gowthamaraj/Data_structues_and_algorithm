@@ -4,3 +4,4 @@ Implementing Data structures using Python
 -----------------------------------------
 * LinkedList
 * Queues
+* Binary_Search
