@@ -9,3 +9,6 @@ Implementing Data structures & Algorithms using Python
 * Naive_BubbleSort
 * MergeSort
 * QuickSort
+* HashTable
+* BinaryTree
+* BinarySearchTree
