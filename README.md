@@ -12,3 +12,4 @@ Implementing Data structures & Algorithms using Python
 * HashTable
 * BinaryTree
 * BinarySearchTree
+* Graph
